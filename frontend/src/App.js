@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import Button from "./Button";
 import "./App.css";
 import "./Navbar.css";
 
@@ -24,13 +25,22 @@ function App() {
   return (
     <div className="App overall-layout">
       <Navbar />
-      <button
-        className="theme-toggle"
-        onClick={toggleTheme}
+      <Button
+        variant={theme === "light" ? "primary" : "secondary"}
+        size="sm"
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          borderRadius: "8px",
+          zIndex: 101
+        }}
         aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        onClick={toggleTheme}
+        className="theme-toggle"
       >
         {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-      </button>
+      </Button>
       <div className="main-layout-container">
         <aside className="sidebar">
           {/* Sidebar (notes list) placeholder */}

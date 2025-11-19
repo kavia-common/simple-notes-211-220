@@ -1,0 +1,9 @@
+.custom-btn:focus-visible {
+  outline: none;
+}
+.custom-btn::-moz-focus-inner {
+  border: 0;
+}
+.custom-btn[aria-busy="true"] {
+  cursor: progress;
+}
