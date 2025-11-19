@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Button.css";
+import { cn } from "./utils";
 
 /**
  * PUBLIC_INTERFACE
@@ -40,15 +41,13 @@ function Button({
   // Styles and classes
   const variantClass = VARIANT_CLASS[variant] || ""; // fallback to neutral
   const sizeClass = SIZE_CLASS[size] || "md";
-  const classes = [
+  const classes = cn(
     "custom-btn",
     variantClass,
     sizeClass,
-    fullWidth ? "fullWidth" : "",
+    fullWidth && "fullWidth",
     className
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   // Spinner Element
   const spinner = (

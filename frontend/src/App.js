@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Button from "./Button";
 import "./App.css";
 import "./Navbar.css";
+import { uid, setItem, getItem, removeItem, cn } from "./utils";
 
 /**
  * PUBLIC_INTERFACE
@@ -22,8 +23,15 @@ function App() {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
+  // Example usage: Generate a placeholder uid for new notes using util
+  // const newNoteId = uid("note");
+
+  // Example usage: Scaffold for persisting notes (to be expanded as feature grows)
+  // setItem("notes", [...existingNotes]);
+  // const notes = getItem("notes", []);
+
   return (
-    <div className="App overall-layout">
+    <div className={cn("App", "overall-layout")}>
       <Navbar />
       <Button
         variant={theme === "light" ? "primary" : "secondary"}
@@ -41,21 +49,21 @@ function App() {
       >
         {theme === "light" ? "🌙 Dark" : "☀️ Light"}
       </Button>
-      <div className="main-layout-container">
-        <aside className="sidebar">
+      <div className={cn("main-layout-container")}>
+        <aside className={cn("sidebar")}>
           {/* Sidebar (notes list) placeholder */}
-          <div className="sidebar-header">My Notes</div>
-          <ul className="notes-list">
+          <div className={cn("sidebar-header")}>My Notes</div>
+          <ul className={cn("notes-list")}>
             {/* Example placeholder */}
-            <li className="note-item selected">Welcome Note</li>
-            <li className="note-item">Add more...</li>
+            <li className={cn("note-item", "selected")}>Welcome Note</li>
+            <li className={cn("note-item")}>Add more...</li>
           </ul>
         </aside>
-        <main className="main-content">
+        <main className={cn("main-content")}>
           {/* Main area (note editor/viewer) placeholder */}
-          <div className="main-editor">
+          <div className={cn("main-editor")}>
             <h2>Note Title</h2>
-            <textarea className="note-editor" rows={12} placeholder="Start writing your note..." />
+            <textarea className={cn("note-editor")} rows={12} placeholder="Start writing your note..." />
           </div>
         </main>
       </div>

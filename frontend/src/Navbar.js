@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { cn } from "./utils";
 
 // PUBLIC_INTERFACE
 function Navbar() {
@@ -9,11 +10,11 @@ function Navbar() {
    * It remains sticky and is responsive.
    */
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <span className="navbar-title">
-          <span className="accent-strong">Simple</span>
-          <span className="accent-weak">Notes</span>
+    <nav className={cn("navbar")}>
+      <div className={cn("navbar-container")}>
+        <span className={cn("navbar-title")}>
+          <span className={cn("accent-strong")}>Simple</span>
+          <span className={cn("accent-weak")}>Notes</span>
         </span>
       </div>
     </nav>
