@@ -25,6 +25,37 @@ export function uid(prefix = "id") {
 
 // PUBLIC_INTERFACE
 /**
+ * Debounce: delays function execution until after wait ms have elapsed since final call.
+ * Useful for input handlers, e.g. search or note editor.
+ * @param {Function} fn - function to debounce
+ * @param {number} delay - ms
+ * @returns {Function} debounced function
+ */
+export function debounce(fn, delay) {
+  let timer;
+  return function debounced(...args) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+// PUBLIC_INTERFACE
+/**
+ * safeParse: parses JSON with fallback value if parsing fails.
+ * @param {string} str - the JSON string
+ * @param {*} fallback - value to return if parse fails
+ * @returns {*} parsed value or fallback
+ */
+export function safeParse(str, fallback) {
+  try {
+    return JSON.parse(str);
+  } catch {
+    return fallback;
+  }
+}
+
+// PUBLIC_INTERFACE
+/**
  * Local storage helpers with JSON safety and namespacing.
  * Key will always be prefixed with 'simple-notes:'.
  */
@@ -42,7 +73,8 @@ export function setItem(key, value) {
 export function getItem(key, fallback = null) {
   try {
     const raw = window.localStorage.getItem(NAMESPACE + key);
-    return raw === null ? fallback : JSON.parse(raw);
+    // Use safeParse utility to handle invalid JSON gracefully
+    return raw === null ? fallback : safeParse(raw, fallback);
   } catch (err) {
     return fallback;
   }

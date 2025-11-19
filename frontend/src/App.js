@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Navbar from "./Navbar";
 import Button from "./Button";
 import "./App.css";
 import "./Navbar.css";
-import { uid, setItem, getItem, removeItem, cn } from "./utils";
+import { uid, setItem, getItem, removeItem, cn, debounce } from "./utils";
 
 /**
  * PUBLIC_INTERFACE
@@ -29,6 +29,28 @@ function App() {
   // Example usage: Scaffold for persisting notes (to be expanded as feature grows)
   // setItem("notes", [...existingNotes]);
   // const notes = getItem("notes", []);
+
+  // State for editor input (future: link to current note's content)
+  const [editorValue, setEditorValue] = useState("");
+
+  // Ref to hold latest value, for debounced update
+  const editorValueRef = useRef(editorValue);
+  editorValueRef.current = editorValue;
+
+  // Debounced handler for editor changes, e.g. saving to state/storage; can adapt for search as well
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSetEditorValue = useCallback(
+    debounce((value) => {
+      setEditorValue(value);
+      // Optionally: setItem('currentNote', value); // example of saving efficiently
+    }, 300),
+    []
+  );
+
+  function handleEditorChange(e) {
+    const value = e.target.value;
+    debouncedSetEditorValue(value);
+  }
 
   return (
     <div className={cn("App", "overall-layout")}>
@@ -63,7 +85,13 @@ function App() {
           {/* Main area (note editor/viewer) placeholder */}
           <div className={cn("main-editor")}>
             <h2>Note Title</h2>
-            <textarea className={cn("note-editor")} rows={12} placeholder="Start writing your note..." />
+            <textarea
+              className={cn("note-editor")}
+              rows={12}
+              placeholder="Start writing your note..."
+              onChange={handleEditorChange}
+              defaultValue={editorValue}
+            />
           </div>
         </main>
       </div>
