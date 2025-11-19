@@ -1,9 +1,153 @@
-.custom-btn:focus-visible {
-  outline: none;
+:root {
+  --btn-neutral-bg: #f5f7fa;
+  --btn-neutral-color: #222e39;
+  --btn-neutral-border: #dbe4ee;
+
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-color: #fff;
+  --btn-primary-border: #3b82f6;
+
+  --btn-secondary-bg: #f5f7fa;
+  --btn-secondary-color: #64748b;
+  --btn-secondary-border: #64748b;
+
+  --btn-success-bg: #06b6d4;
+  --btn-success-color: #fff;
+  --btn-success-border: #06b6d4;
+
+  --btn-danger-bg: hsl(0 84% 60%);
+  --btn-danger-color: #fff;
+  --btn-danger-border: hsl(0 84% 60%);
 }
+
+.custom-btn {
+  font-family: inherit;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  outline: none;
+  border-radius: 7px;
+  border: 1.5px solid var(--btn-neutral-border, #dbe4ee);
+  background: var(--btn-neutral-bg, #f5f7fa);
+  color: var(--btn-neutral-color, #1a2431);
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.16s, border 0.16s, color 0.14s, box-shadow 0.13s;
+  user-select: none;
+  position: relative;
+  min-width: 72px;
+}
+
+.custom-btn:focus-visible {
+  outline: 2px solid var(--btn-primary-bg, #3b82f6);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--btn-primary-bg, #3b82f6, 0.12);
+}
+
 .custom-btn::-moz-focus-inner {
   border: 0;
 }
+
 .custom-btn[aria-busy="true"] {
   cursor: progress;
+  opacity: 0.66;
+}
+
+.custom-btn:disabled,
+.custom-btn[aria-busy="true"] {
+  opacity: 0.56;
+  pointer-events: none;
+  background: var(--btn-neutral-bg, #f5f7fa);
+  color: #adb5be;
+  border-color: var(--btn-neutral-border, #dbe4ee);
+}
+
+.custom-btn.fullWidth {
+  width: 100%;
+}
+
+/* Size variants */
+.custom-btn.sm {
+  font-size: 0.96rem;
+  padding: 7px 15px;
+  border-radius: 6px;
+}
+
+.custom-btn.md {
+  font-size: 1.07rem;
+  padding: 11px 22px;
+  border-radius: 8px;
+}
+
+.custom-btn.lg {
+  font-size: 1.19rem;
+  padding: 15px 29px;
+  border-radius: 10px;
+}
+
+/* Variants */
+.custom-btn.primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-border);
+}
+.custom-btn.primary:hover:not(:disabled):not([aria-busy="true"]) {
+  background: #215dd8;
+  border-color: #215dd8;
+}
+.custom-btn.primary:focus-visible {
+  outline: 2px solid var(--btn-primary-bg);
+}
+
+.custom-btn.secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-color);
+  border-color: var(--btn-secondary-border);
+}
+.custom-btn.secondary:hover:not(:disabled):not([aria-busy="true"]) {
+  background: #e7e8ee;
+  color: #475569;
+}
+.custom-btn.secondary:focus-visible {
+  outline: 2px solid var(--btn-secondary-border);
+}
+
+.custom-btn.success {
+  background: var(--btn-success-bg);
+  color: var(--btn-success-color);
+  border-color: var(--btn-success-border);
+}
+.custom-btn.success:hover:not(:disabled):not([aria-busy="true"]) {
+  background: #138fa9;
+  border-color: #138fa9;
+}
+.custom-btn.success:focus-visible {
+  outline: 2px solid var(--btn-success-bg);
+}
+
+.custom-btn.danger {
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-color);
+  border-color: var(--btn-danger-border);
+}
+.custom-btn.danger:hover:not(:disabled):not([aria-busy="true"]) {
+  background: hsl(0 74% 54%);
+  border-color: hsl(0 74% 54%);
+}
+.custom-btn.danger:focus-visible {
+  outline: 2px solid var(--btn-danger-bg);
+}
+
+/* Subtle hover/focus for neutral (no variant) */
+.custom-btn:not(.primary):not(.secondary):not(.success):not(.danger):hover:not(:disabled):not([aria-busy="true"]) {
+  background: #e5ecf4;
+  color: #364050;
+}
+
+/* Spinner animation (inline in JSX, keyframes needed) */
+@keyframes subtleSpin {
+  to { transform: rotate(360deg); }
 }
