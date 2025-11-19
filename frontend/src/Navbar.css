@@ -1,0 +1,64 @@
+:root {
+  --navbar-height: 56px;
+  --navbar-bg: #fff;
+  --navbar-shadow: 0 1px 6px 0 rgba(36, 42, 87, 0.05);
+  --navbar-border: #e5e7eb;
+  --navbar-title-font: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  --primary-accent: #3b82f6;
+  --success-accent: #06b6d4;
+}
+
+.navbar {
+  width: 100%;
+  height: var(--navbar-height);
+  background: var(--navbar-bg);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: var(--navbar-shadow);
+  border-bottom: 1px solid var(--navbar-border);
+  display: flex;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.navbar-title {
+  display: flex;
+  align-items: center;
+  font-family: var(--navbar-title-font);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  user-select: none;
+}
+
+.accent-strong {
+  color: var(--primary-accent);
+  margin-right: 2px;
+}
+
+.accent-weak {
+  color: var(--success-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .navbar-container {
+    padding: 0 0.75rem;
+  }
+  .navbar-title {
+    font-size: 1.09rem;
+  }
+}
